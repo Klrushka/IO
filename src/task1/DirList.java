@@ -18,10 +18,7 @@ public class DirList {
 
                 public boolean accept(File dir, String name) {
                     return pattern.matcher(name).matches() &&
-                        !(Collections.disjoint(
-                            Arrays.asList(args),
-                            new TextFile(name)
-                        ));
+                        !(Collections.disjoint(Arrays.asList(args), new TextFile(name)));
                 }
             });
         }
