@@ -1,4 +1,10 @@
 import task1.DirList;
+import task6.ProcessFiles;
+
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,16 +18,27 @@ public class Main {
 
         DirList.start(args);
 
-
+        System.out.println();
 
         /*
         Exercise 6: (5) Use ProcessFiles to find all the Java source-code files in a particular
         directory subtree that have been modified after a particular date.
          */
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
-
-
-
-
+        new ProcessFiles(new ProcessFiles.Strategy() {
+            public void process(File file) {
+                Date date = new Date(file.lastModified());
+                try {
+                    if(date.after(simpleDateFormat.parse("08/12/2021")))
+                        System.out.println(file);
+                } catch(ParseException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }, "java").start(args);
     }
+
+
 }
+
