@@ -1,5 +1,6 @@
 import task1.DirList;
 import task10.FReader;
+import task14.Comparing;
 import task6.ProcessFiles;
 
 import java.io.File;
@@ -70,7 +71,22 @@ public class Main {
         System.out.println();
 
         /*
+        Exercise 14: (2) Starting with BasicFileOutput.java, write a program that compares
+        the performance of writing to a file when using buffered and unbuffered I/O.
+         */
 
+        try {
+            System.out.println("Buffered: " + Comparing.deltaBF(args) + "\n");
+            System.out.println("UnBuffered: " + Comparing.deltaNBF(args));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+
+        /*
+        Exercise 24: (1) Modify IntBufferDemo.java to use doubles.
+        ***********************in pack***************************
          */
 
 
