@@ -3,23 +3,16 @@ package task14;
 import java.io.IOException;
 
 public class Comparing {
-    public static long deltaBF(String... args) throws IOException {
+
+    public static <T extends ReadingClass> long comp(Start t){
         long start;
         long end;
 
         start = System.currentTimeMillis();
-        BFileOutput.start(args);
+        t.start();
         end = System.currentTimeMillis();
         return end - start;
-    }
 
-    public static long deltaNBF(String... args) throws IOException {
-        long start;
-        long end;
 
-        start = System.currentTimeMillis();
-        NBFileOutput.start(args);
-        end = System.currentTimeMillis();
-        return end - start;
     }
 }

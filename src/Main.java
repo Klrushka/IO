@@ -1,10 +1,10 @@
 import task1.DirList;
 import task10.FReader;
+import task14.BFileOutput;
 import task14.Comparing;
+import task14.NBFileOutput;
 import task6.ProcessFiles;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,16 +29,17 @@ public class Main {
         directory subtree that have been modified after a particular date.
          */
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        System.out.println("Enter data please(MM//dd//yyyy): ");
+        //  08/12/2021
+        String sDate = new Scanner(System.in).nextLine();
 
-        new ProcessFiles(new ProcessFiles.Strategy() {
-            public void process(File file) {
-                Date date = new Date(file.lastModified());
-                try {
-                    if(date.after(simpleDateFormat.parse("08/12/2021")))
-                        System.out.println(file);
-                } catch(ParseException e) {
-                    System.out.println(e.getMessage());
-                }
+        new ProcessFiles(file -> {
+            Date date = new Date(file.lastModified());
+            try {
+                if(date.after(simpleDateFormat.parse(sDate)))
+                    System.out.println(file);
+            } catch(ParseException e) {
+                System.out.println(e.getMessage());
             }
         }, "java").start(args);
 
@@ -58,14 +59,12 @@ public class Main {
 
         //E:\University\Programming\JavaDirectory\IO\src\testfiles\Test.txt
 
-        try {
+
             System.out.println("Please enter file path" +
                     "after enter words, which you need find through a space (If you want end, enter 0)");
             FReader.readFileAndDisplayReverseOrder(new Scanner(System.in).nextLine(),FReader.readWords());
 
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+
 
 
         System.out.println();
@@ -75,12 +74,8 @@ public class Main {
         the performance of writing to a file when using buffered and unbuffered I/O.
          */
 
-        try {
-            System.out.println("Buffered: " + Comparing.deltaBF(args) + "\n");
-            System.out.println("UnBuffered: " + Comparing.deltaNBF(args));
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        System.out.println("Buffered: " + Comparing.comp(new BFileOutput()));
+        System.out.println("UnBuffered: " + Comparing.comp(new NBFileOutput()));
 
 
 
