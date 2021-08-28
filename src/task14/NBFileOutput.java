@@ -1,14 +1,16 @@
 package task14;
 
 import java.io.*;
+import java.util.Properties;
 
 public class NBFileOutput extends ReadingClass implements Start {
-    static String file = "src\\task14\\NBFileOutput.out";
+    private static final Properties properties = InitializePropertyFile.init();
 
-    public  void start(){
+    public void start() {
+        assert properties != null;
         try {
-            startRead(new PrintWriter((new FileWriter(file))),file);
-        } catch (IOException e){
+            startRead(new PrintWriter((new FileWriter(properties.getProperty("NBFFile")))), properties.getProperty("NBFFile"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

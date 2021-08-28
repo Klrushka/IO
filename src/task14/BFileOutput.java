@@ -1,16 +1,22 @@
 package task14;
 
 import java.io.*;
+import java.util.Properties;
 
 
 public class BFileOutput extends ReadingClass implements Start {
-    String file = "src\\task14\\BFileOutput.out";
+
+
+    private final static Properties PROPERTIES = InitializePropertyFile.init();
+
+
 
     @Override
     public void start() {
         try {
+            assert PROPERTIES != null;
             startRead(new PrintWriter(
-                    new BufferedWriter(new FileWriter(file))), file);
+                    new BufferedWriter(new FileWriter(PROPERTIES.getProperty("BFFile")))), PROPERTIES.getProperty("BFFile"));
         } catch (IOException e) {
             e.printStackTrace();
         }
